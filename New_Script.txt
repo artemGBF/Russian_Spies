@@ -1,0 +1,196 @@
+SET ThousandSep=',';
+SET DecimalSep='.';
+SET MoneyThousandSep=',';
+SET MoneyDecimalSep='.';
+SET MoneyFormat='$#,##0.00;-$#,##0.00';
+SET TimeFormat='h:mm:ss TT';
+SET DateFormat='D/M/YYYY';
+SET TimestampFormat='D/M/YYYY h:mm:ss[.fff] TT';
+SET FirstWeekDay=6;
+SET BrokenWeeks=1;
+SET ReferenceDay=0;
+SET FirstMonthOfYear=1;
+SET CollationLocale='en-SG';
+SET MonthNames='Jan;Feb;Mar;Apr;May;Jun;Jul;Aug;Sep;Oct;Nov;Dec';
+SET LongMonthNames='January;February;March;April;May;June;July;August;September;October;November;December';
+SET DayNames='Mon;Tue;Wed;Thu;Fri;Sat;Sun';
+SET LongDayNames='Monday;Tuesday;Wednesday;Thursday;Friday;Saturday;Sunday';
+Forum:
+LOAD @1 as FrequentFlyerFirstName, 
+     @2 as FrequentFlyerLastName, 
+     @3 as FrequentFlyernumber, 
+     @4 as FrequentFlyerSex, 
+     @5 as FrequentFlyerTrvelDoc, 
+     @6 as FlightDate, 
+     @7 as FlightCodeSh, 
+     @8 as CityArrival, 
+     @9 as AirportArrival, 
+     @10 as CountryArrival, 
+     @11 as Flight, 
+     @12 as CityDeparture, 
+     @13 as AirportDeparture, 
+     @14 as CountryDeparture, 
+     @15 as StatusProgramm, 
+     @16 &' '&@17 as card_number
+FROM
+[G:\Documents\7semester\Data Science\Airlines\ForumProfilesPART3.csv]
+(txt, codepage is 28591, no labels, delimiter is ',', msq);
+LOAD @1 as FrequentFlyerFirstName, 
+     @2 as FrequentFlyerLastName, 
+     @3 as FrequentFlyernumber, 
+     @4 as FrequentFlyerSex, 
+     @5 as FrequentFlyerTrvelDoc, 
+     @6 as FlightDate, 
+     @7 as FlightCodeSh, 
+     @8 as CityArrival, 
+     @9 as AirportArrival, 
+     @10 as CountryArrival, 
+     @11 as Flight, 
+     @12 as CityDeparture, 
+     @13 as AirportDeparture, 
+     @14 as CountryDeparture, 
+     @15 as StatusProgramm, 
+     @16 &' '&@17 as card_number
+FROM
+[G:\Documents\7semester\Data Science\Airlines\ForumProfilesPART1.csv]
+(txt, codepage is 28591, no labels, delimiter is ',', msq);
+
+LOAD @1 as FrequentFlyerFirstName, 
+     @2 as FrequentFlyerLastName, 
+     @3 as FrequentFlyernumber, 
+     @4 as FrequentFlyerSex, 
+     @5 as FrequentFlyerTrvelDoc, 
+     @6 as FlightDate, 
+     @7 as FlightCodeSh, 
+     @8 as CityArrival, 
+     @9 as AirportArrival, 
+     @10 as CountryArrival, 
+     @11 as Flight, 
+     @12 as CityDeparture, 
+     @13 as AirportDeparture, 
+     @14 as CountryDeparture, 
+     @15 as StatusProgramm, 
+     @16 &' '&@17 as card_number
+FROM
+[G:\Documents\7semester\Data Science\Airlines\ForumProfilesPART3.csv]
+(txt, codepage is 28591, no labels, delimiter is ',', msq);
+
+
+Points:
+LOAD uid, 
+     first, 
+     last, 
+     card_number, 
+     code, 
+     date, 
+     departure, 
+     arrival, 
+     fare
+FROM
+[G:\Documents\7semester\Data Science\Airlines\PointzAggreg.csv]
+(txt, codepage is 28591, embedded labels, delimiter is ',', msq);
+
+Flyer_points:
+LOAD uid,  
+	 first, 
+     last, 
+     card_number Resident Points;
+INNER JOIN (Flyer_points)
+LOAD FrequentFlyernumber,  card_number Resident Forum;
+
+Sirena:
+LOAD PaxName, 
+     PaxBirthDate, 
+     DepartDate, 
+     DepartTime, 
+     ArrivalDate, 
+     ArrivalTime, 
+     Flight, 
+     CodeSh, 
+     From, 
+     Dest, 
+     Code, 
+     [e-Ticket] as e_ticket, 
+     TravelDoc, 
+     Seat, 
+     Meal, 
+     TrvCls, 
+     Fare, 
+     Baggage, 
+     PaxAdditionalInfo, 
+     card_number, 
+     AgentInfo
+FROM
+[G:\Documents\7semester\Data Science\Airlines\Sirena_export_fixed.csv]
+(ooxml, embedded labels, table is Sheet1);
+Aero:
+LOAD PaxFI, 
+     e_ticket, 
+     PNR, 
+     Seat, 
+     From, 
+     Dest, 
+     CodeFrom, 
+     CodeDest, 
+     Flight, 
+     Date, 
+     Time, 
+     Sequence, 
+     Gender, 
+     SomeInfo as card_number, 
+     TrvCls
+FROM
+[G:\Documents\7semester\Data Science\Airlines\DotAero.csv]
+(txt, codepage is 28591, embedded labels, delimiter is ';', msq);
+S:
+LOAD e_ticket,card_number Resident Aero;
+OUTER JOIN (S)
+LOAD PaxName,  e_ticket,  card_number, TravelDoc Resident Sirena;
+
+InfoFlyer:
+LOAD
+PaxName, TravelDoc,  card_number Resident S;
+INNER JOIN (InfoFlyer)
+LOAD
+	FrequentFlyernumber, 
+	uid,  
+    card_number,
+    first, 
+    last Resident Flyer_points;
+Boarding:
+LOAD PassengerFirstName, 
+     PassengerSecondName, 
+     PassengerLastName, 
+     PassengerSex, 
+     PassengerBirthDate, 
+     PassengerDocument, 
+     BookingCode, 
+     TicketNumber, 
+     Baggage, 
+     FlightDate, 
+     FlightTime, 
+     FlightNumber, 
+     CodeShare, 
+     Destination
+FROM
+[G:\Documents\7semester\Data Science\Airlines\BoardingData.csv]
+(txt, codepage is 28591, embedded labels, delimiter is ';', msq);
+LOAD
+Baggage,
+PassengerDocument as TravelDoc Resident Boarding;
+Fly:
+LOAD FlightDate,
+	 FrequentFlyernumber,
+	 Flight,
+	 AirportArrival,
+	 AirportDeparture Resident Forum; 
+	
+LOAD  
+     @2 as Class_card,    
+     @4 &' ' &@5 as card_number   
+FROM
+[G:\Documents\7semester\Data Science\Airlines\SkyTeam_Exchange.csv]
+(txt, codepage is 28591, no labels, delimiter is ';', msq);
+
+    
+DROP TABLE Forum, Points, Sirena,Aero, Flyer_points,S, Boarding;
