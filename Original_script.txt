@@ -1,0 +1,172 @@
+LOAD PassengerFirstName, 
+     PassengerSecondName, 
+     PassengerLastName, 
+     PassengerSex, 
+     PassengerBirthDate, 
+     PassengerDocument, 
+     BookingCode, 
+     TicketNumber, 
+     Baggage, 
+     FlightDate, 
+     FlightTime, 
+     FlightNumber, 
+     CodeShare, 
+     Destination
+FROM
+D:\DataScience\БДЗ\DB\BoardingData.csv
+(txt, codepage is 1251, embedded labels, delimiter is ';', msq);
+
+LOAD @1 as FrequentFlyerFirstName, 
+     @2 as FrequentFlyerLastName, 
+     @3 as FrequentFlyerNumber, 
+     @4 as FrequentFlyerSex, 
+     @5 as FrequentFlyerTravelDoc, 
+     @6 as FlightDate, 
+     @7 as FlightCodeSh, 
+     @8 as CityArrival, 
+     @9 as AirportArrival, 
+     @10 as CountryArrival, 
+     @11 as Flight, 
+     @12 as CityDeparture, 
+     @13 as AirportDeparture, 
+     @14 as CountyDeparture, 
+     @15 as StatusProgramm, 
+     @16 as Programm, 
+     @17 as NumberProgramm
+FROM
+D:\DataScience\БДЗ\DB\ForumProfilesPART1.csv
+(txt, codepage is 1251, no labels, delimiter is ',', msq);
+
+LOAD @1 as FrequentFlyerFirstName, 
+     @2 as FrequentFlyerLastName, 
+     @3 as FrequentFlyerNumber, 
+     @4 as FrequentFlyerSex, 
+     @5 as FrequentFlyerTravelDoc, 
+     @6 as FlightDate, 
+     @7 as FlightCodeSh, 
+     @8 as CityArrival, 
+     @9 as AirportArrival, 
+     @10 as CountryArrival, 
+     @11 as Flight, 
+     @12 as CityDeparture, 
+     @13 as AirportDeparture, 
+     @14 as CountyDeparture, 
+     @15 as StatusProgramm, 
+     @16 as Programm, 
+     @17 as NumberProgramm
+FROM
+D:\DataScience\БДЗ\DB\ForumProfilesPART2.csv
+(txt, codepage is 1251, no labels, delimiter is ',', msq);
+
+LOAD @1 as FrequentFlyerFirstName, 
+     @2 as FrequentFlyerLastName, 
+     @3 as FrequentFlyerNumber, 
+     @4 as FrequentFlyerSex, 
+     @5 as FrequentFlyerTravelDoc, 
+     @6 as FlightDate, 
+     @7 as FlightCodeSh, 
+     @8 as CityArrival, 
+     @9 as AirportArrival, 
+     @10 as CountryArrival, 
+     @11 as Flight, 
+     @12 as CityDeparture, 
+     @13 as AirportDeparture, 
+     @14 as CountyDeparture, 
+     @15 as StatusProgramm, 
+     @16 as Programm, 
+     @17 as NumberProgramm
+FROM
+D:\DataScience\БДЗ\DB\ForumProfilesPART3.csv
+(txt, codepage is 1251, no labels, delimiter is ',', msq);
+
+LOAD uid, 
+     [first], 
+     last, 
+     cards_type, 
+     card_number, 
+     bonusprogramm, 
+     activities_type, 
+     activity_type, 
+     code, 
+     date, 
+     departure, 
+     arrival, 
+     fare
+FROM
+D:\DataScience\БДЗ\DB\PointzAggreg.csv
+(txt, codepage is 1251, embedded labels, delimiter is ',', msq);
+LOAD PaxName, 
+     PaxBirthDate, 
+     DepartDate, 
+     DepartTime, 
+     ArrivalDate, 
+     ArrivalTime, 
+     Flight, 
+     CodeSh, 
+     [From], 
+     Dest, 
+     Code, 
+     [e-Ticket], 
+     TravelDoc, 
+     Seat, 
+     Meal, 
+     TrvCls, 
+     Fare, 
+     Baggage, 
+     PaxAdditionalInfo, 
+     card_number, 
+     AgentInfo
+FROM
+D:\DataScience\БДЗ\DB\Sirena_export_fixed.csv
+(ooxml, embedded labels, table is Sheet1);
+
+
+LOAD @1 as DateFlight, 
+     @2 as Class, 
+     @3 as Fare, 
+     @4 &' ' &@5 as Card_number, 
+     @6 as Departure, 
+     @7 as Arrival, 
+     @8 as Status
+FROM
+D:\DataScience\БДЗ\DB\SkyTeam-Exchange.csv
+(txt, codepage is 1251, no labels, delimiter is ';', msq);
+
+LOAD from_city, 
+     from_country, 
+     from_aeroport, 
+     to_city, 
+     to_country, 
+     to_aeroport, 
+     date_from, 
+     date_to, 
+     days, 
+     depTime, 
+     arrTime, 
+     Flight, 
+     aircraft, 
+     travelTime
+FROM
+D:\DataScience\БДЗ\DB\Output.csv
+(txt, codepage is 1251, embedded labels, delimiter is ';', msq);
+
+LOAD PaxFI, 
+     e_ticket, 
+     PaxProblem, 
+     PNR, 
+     Seat, 
+     AgentInfo, 
+     [From], 
+     Dest, 
+     CodeFrom, 
+     CodeDest, 
+     Flight, 
+     Date, 
+     Time, 
+     Sequence, 
+     Gender, 
+     SomeInfo, 
+     TrvCls
+FROM
+D:\DataScience\БДЗ\DB\DotAero.csv
+(txt, codepage is 1251, embedded labels, delimiter is ';', msq);
